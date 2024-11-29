@@ -9,37 +9,19 @@ from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 import google.generativeai as genai
+from dotenv import load_dotenv, find_dotenv
 
 app = Flask(__name__)
+
 
 es = Elasticsearch("http://localhost:9200")
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
-# Add OpenAI API key configuration
-# openai.api_key = os.getenv('OPENAI_API_KEY')
-# client = openai.OpenAI()
 
 
-# Load a small, efficient local model
-# try:
-#     tokenizer = AutoTokenizer.from_pretrained("microsoft/phi-2", trust_remote_code=True)
-#     local_model = AutoModelForCausalLM.from_pretrained("microsoft/phi-2", trust_remote_code=True, torch_dtype=torch.float16)
-    
-#     # Move model to GPU if available
-#     if torch.cuda.is_available():
-#         local_model = local_model.to('cuda')
-# except Exception as e:
-#     print(f"Error loading model: {e}")
-#     local_model = None
-#     tokenizer = None
-
-
-# Configure Google Gemini API
-# GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')  # Recommended: Use environment variable
-# if not GOOGLE_API_KEY:
-#     raise ValueError("Please set the GOOGLE_API_KEY environment variable")
-
-genai.configure(api_key="AIzaSyCYpG68CNCyjf6UCDw_0wgldAdH5d13ai8")
+load_dotenv(find_dotenv())
+GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
+genai.configure(api_key=GOOGLE_API_KEY)
 #model = genai.GenerativeModel('gemini-1.5-flash')
 
 es = Elasticsearch("http://localhost:9200")
