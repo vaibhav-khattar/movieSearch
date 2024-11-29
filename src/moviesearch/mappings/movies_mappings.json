@@ -1,0 +1,24 @@
+{
+    "mappings": {
+      "properties": {
+        "title": { "type": "text" },
+        "overview": { "type": "text" },
+        "genre": {
+            "type": "text",
+            "fields": {
+                "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                }
+            }
+        },
+        "release_year": { "type": "integer" },
+        "rating": { "type": "float" },
+        "embedding": { 
+          "type": "dense_vector", 
+          "dims": 384 
+        }
+      }
+    }
+  }
+  

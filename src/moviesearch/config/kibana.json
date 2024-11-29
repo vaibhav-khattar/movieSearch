@@ -1,0 +1,323 @@
+{
+    "version": "8.x",
+    "type": "dashboard",
+    "title": "Movie Analytics Dashboard",
+    "description": "Comprehensive dashboard for movie search and recommendation insights",
+    "visualizations": [
+        {
+            "id": "movies-by-genre-pie-chart",
+            "type": "visualization",
+            "title": "Movies by Genre Distribution",
+            "visState": {
+                "title": "Movies by Genre Distribution",
+                "type": "pie",
+                "params": {
+                    "type": "pie",
+                    "addTooltip": true,
+                    "addLegend": true,
+                    "legendPosition": "right",
+                    "isDonut": false
+                },
+                "aggs": [
+                    {
+                        "id": "1",
+                        "enabled": true,
+                        "type": "count",
+                        "schema": "metric",
+                        "params": {}
+                    },
+                    {
+                        "id": "2",
+                        "enabled": true,
+                        "type": "terms",
+                        "schema": "segment",
+                        "params": {
+                            "field": "genre.keyword",
+                            "size": 10,
+                            "order": "desc",
+                            "orderBy": "1"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": "movies-by-year-bar-chart",
+            "type": "visualization",
+            "title": "Movies Released per Year",
+            "visState": {
+                "title": "Movies Released per Year",
+                "type": "histogram",
+                "params": {
+                    "type": "histogram",
+                    "grid": {
+                        "categoryLines": false
+                    },
+                    "categoryAxes": [
+                        {
+                            "id": "CategoryAxis-1",
+                            "type": "category",
+                            "position": "bottom",
+                            "show": true,
+                            "style": {},
+                            "scale": {
+                                "type": "linear"
+                            },
+                            "labels": {
+                                "show": true,
+                                "rotate": 0,
+                                "filter": false,
+                                "truncate": 100
+                            },
+                            "title": {}
+                        }
+                    ],
+                    "valueAxes": [
+                        {
+                            "id": "ValueAxis-1",
+                            "name": "LeftAxis-1",
+                            "type": "value",
+                            "position": "left",
+                            "show": true,
+                            "style": {},
+                            "scale": {
+                                "type": "linear",
+                                "mode": "normal"
+                            },
+                            "labels": {
+                                "show": true,
+                                "rotate": 0,
+                                "filter": false,
+                                "truncate": 100
+                            },
+                            "title": {
+                                "text": "Movie Count"
+                            }
+                        }
+                    ],
+                    "seriesParams": [
+                        {
+                            "show": true,
+                            "type": "histogram",
+                            "mode": "stacked",
+                            "data": {
+                                "label": "Count",
+                                "id": "1"
+                            },
+                            "valueAxis": "ValueAxis-1",
+                            "drawLinesBetweenPoints": true,
+                            "showCircles": true
+                        }
+                    ],
+                    "addTooltip": true,
+                    "addLegend": true,
+                    "legendPosition": "right",
+                    "times": [],
+                    "addTimeMarker": false
+                },
+                "aggs": [
+                    {
+                        "id": "1",
+                        "enabled": true,
+                        "type": "count",
+                        "schema": "metric",
+                        "params": {}
+                    },
+                    {
+                        "id": "2",
+                        "enabled": true,
+                        "type": "histogram",
+                        "schema": "segment",
+                        "params": {
+                            "field": "release_year",
+                            "interval": 5,
+                            "minDocCount": 1,
+                            "extended_bounds": {}
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": "movie-ratings-distribution",
+            "type": "visualization",
+            "title": "Movie Ratings Distribution",
+            "visState": {
+                "title": "Movie Ratings Distribution",
+                "type": "histogram",
+                "params": {
+                    "type": "histogram",
+                    "grid": {
+                        "categoryLines": false
+                    },
+                    "categoryAxes": [
+                        {
+                            "id": "CategoryAxis-1",
+                            "type": "category",
+                            "position": "bottom",
+                            "show": true,
+                            "style": {},
+                            "scale": {
+                                "type": "linear"
+                            },
+                            "labels": {
+                                "show": true,
+                                "rotate": 0,
+                                "filter": false,
+                                "truncate": 100
+                            },
+                            "title": {
+                                "text": "Rating"
+                            }
+                        }
+                    ],
+                    "valueAxes": [
+                        {
+                            "id": "ValueAxis-1",
+                            "name": "LeftAxis-1",
+                            "type": "value",
+                            "position": "left",
+                            "show": true,
+                            "style": {},
+                            "scale": {
+                                "type": "linear",
+                                "mode": "normal"
+                            },
+                            "labels": {
+                                "show": true,
+                                "rotate": 0,
+                                "filter": false,
+                                "truncate": 100
+                            },
+                            "title": {
+                                "text": "Number of Movies"
+                            }
+                        }
+                    ],
+                    "seriesParams": [
+                        {
+                            "show": true,
+                            "type": "histogram",
+                            "mode": "stacked",
+                            "data": {
+                                "label": "Count",
+                                "id": "1"
+                            },
+                            "valueAxis": "ValueAxis-1",
+                            "drawLinesBetweenPoints": true,
+                            "showCircles": true
+                        }
+                    ],
+                    "addTooltip": true,
+                    "addLegend": true,
+                    "legendPosition": "right"
+                },
+                "aggs": [
+                    {
+                        "id": "1",
+                        "enabled": true,
+                        "type": "count",
+                        "schema": "metric",
+                        "params": {}
+                    },
+                    {
+                        "id": "2",
+                        "enabled": true,
+                        "type": "histogram",
+                        "schema": "segment",
+                        "params": {
+                            "field": "rating",
+                            "interval": 0.5,
+                            "minDocCount": 1,
+                            "extended_bounds": {
+                                "min": 0,
+                                "max": 10
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "dashboard": {
+        "id": "movie-search-dashboard",
+        "title": "Movie Search Analytics Dashboard",
+        "description": "Comprehensive insights into movie database",
+        "hits": 0,
+        "kibanaSavedObjectMeta": {
+            "searchSourceJSON": "{\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filter\":[]}"
+        },
+        "panelsJSON": [
+            {
+                "gridData": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 24,
+                    "h": 15,
+                    "i": "movies-by-genre"
+                },
+                "version": "8.x",
+                "panelIndex": "movies-by-genre",
+                "type": "visualization",
+                "id": "movies-by-genre-pie-chart",
+                "title": "Movies by Genre Distribution"
+            },
+            {
+                "gridData": {
+                    "x": 0,
+                    "y": 15,
+                    "w": 24,
+                    "h": 15,
+                    "i": "movies-by-year"
+                },
+                "version": "8.x",
+                "panelIndex": "movies-by-year",
+                "type": "visualization",
+                "id": "movies-by-year-bar-chart",
+                "title": "Movies Released per Year"
+            },
+            {
+                "gridData": {
+                    "x": 0,
+                    "y": 30,
+                    "w": 24,
+                    "h": 15,
+                    "i": "movie-ratings"
+                },
+                "version": "8.x",
+                "panelIndex": "movie-ratings",
+                "type": "visualization",
+                "id": "movie-ratings-distribution",
+                "title": "Movie Ratings Distribution"
+            }
+        ]
+    },
+    "index_patterns": [
+        {
+            "id": "movies-idx",
+            "title": "movies-idx",
+            "fields": {
+                "title": {
+                    "type": "text",
+                    "searchable": true,
+                    "aggregatable": false
+                },
+                "genre": {
+                    "type": "keyword",
+                    "searchable": true,
+                    "aggregatable": true
+                },
+                "release_year": {
+                    "type": "integer",
+                    "searchable": true,
+                    "aggregatable": true
+                },
+                "rating": {
+                    "type": "float",
+                    "searchable": true,
+                    "aggregatable": true
+                }
+            }
+        }
+    ]
+}

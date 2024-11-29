@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Search Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Movie Search Platform</h1>
+
+        <!-- Movie Chat Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Movie Chat Assistant
+            </div>
+            <div class="card-body">
+                <form id="movie-chat-form">
+                    <div class="input-group mb-3">
+                        <input 
+                            type="text" 
+                            id="movie-chat-input" 
+                            class="form-control" 
+                            placeholder="Ask a question about movies..."
+                        >
+                        <button class="btn btn-primary" type="submit">
+                            Chat
+                        </button>
+                    </div>
+                </form>
+                <p class="text-muted small">
+                    Ask about movie recommendations, details, or get movie-related information.
+                </p>
+            </div>
+        </div>
+
+        <!-- Advanced Search Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Advanced Search
+            </div>
+            <div class="card-body">
+                <form id="advanced-search-form">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Genres</h5>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genre" id="genre-action" value="Action">
+                                <label class="form-check-label" for="genre-action">Action</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genre" id="genre-comedy" value="Comedy">
+                                <label class="form-check-label" for="genre-comedy">Comedy</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genre" id="genre-drama" value="Drama">
+                                <label class="form-check-label" for="genre-drama">Drama</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genre" id="genre-sci-fi" value="Science Fiction">
+                                <label class="form-check-label" for="genre-sci-fi">Sci-Fi</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genre" id="genre-thriller" value="Thriller">
+                                <label class="form-check-label" for="genre-thriller">Thriller</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genre" id="genre-adventure" value="Adventure">
+                                <label class="form-check-label" for="genre-adventure">Adventure</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genre" id="genre-family" value="Family">
+                                <label class="form-check-label" for="genre-family">Family</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genre" id="genre-romance" value="Romance">
+                                <label class="form-check-label" for="genre-romance">Romance</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genre" id="genre-animation" value="Animation">
+                                <label class="form-check-label" for="genre-animation">Animation</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genre" id="genre-fantasy" value="Fantasy">
+                                <label class="form-check-label" for="genre-fantasy">Fantasy</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genre" id="genre-crime" value="Crime">
+                                <label class="form-check-label" for="genre-crime">Crime</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genre" id="genre-horror" value="Horror">
+                                <label class="form-check-label" for="genre-horror">Horror</label>
+                            </div>
+                            <!-- Add more genre checkboxes as needed -->
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="min-year" class="form-label">Year Range</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="min-year" placeholder="Min Year">
+                                    <input type="number" class="form-control" id="max-year" placeholder="Max Year">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="min-rating" class="form-label">Minimum Rating</label>
+                                <input type="number" class="form-control" id="min-rating" placeholder="Minimum Rating">
+                            </div>
+                            <div class="mb-3">
+                                <label for="sort-by" class="form-label">Sort By</label>
+                                <select class="form-select" id="sort-by">
+                                    <option value="title_asc">Title (A-Z)</option>
+                                    <option value="title_desc">Title (Z-A)</option>
+                                    <option value="rating_desc">Highest Rated</option>
+                                    <option value="rating_asc">Lowest Rated</option>
+                                    <option value="year_desc">Newest First</option>
+                                    <option value="year_asc">Oldest First</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="result-limit" class="form-label">Results Limit</label>
+                                <input type="number" class="form-control" id="result-limit" value="10" placeholder="Number of results">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Advanced Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Recommendations Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Movie Recommendations
+            </div>
+            <div class="card-body">
+                <form id="recommendation-form">
+                    <div class="input-group mb-3">
+                        <input 
+                            type="text" 
+                            id="recommendation-input" 
+                            class="form-control" 
+                            placeholder="Enter a movie title..."
+                        >
+                        <button class="btn btn-primary" type="submit">
+                            Get Recommendations
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Results Container -->
+        <div id="results" class="mt-4"></div>
+    </div>
+
+    <script src="././static/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Advanced Movie Search</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Movie Search Platform</h1>
+         
+        <!-- Advanced Search Form -->
+        <!-- <form id="advanced-search-form" class="mb-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Genres</h4>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genre" value="Action" id="genre-action">
+                        <label class="form-check-label" for="genre-action">Action</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genre" value="Comedy" id="genre-comedy">
+                        <label class="form-check-label" for="genre-comedy">Comedy</label>
+                    </div>
+                    <!-- Add more genres -->
+                <!-- </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label>Year Range</label>
+                        <input type="number" id="min-year" class="form-control" placeholder="Min Year">
+                        <input type="number" id="max-year" class="form-control" placeholder="Max Year">
+                    </div>
+                    <div class="mb-3">
+                        <label>Minimum Rating</label>
+                        <input type="number" id="min-rating" class="form-control" min="0" max="10" step="0.1" placeholder="Minimum Rating">
+                    </div>
+                    <div class="mb-3">
+                        <label>Sort By</label>
+                        <select id="sort-by" class="form-control">
+                            <option value="rating_desc">Highest Rated</option>
+                            <option value="rating_asc">Lowest Rated</option>
+                            <option value="title_asc">Title (A-Z)</option>
+                            <option value="year_desc">Newest First</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label>Results Limit</label>
+                        <input type="number" id="result-limit" class="form-control" value="10" min="1" max="50">
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+ 
+        <!-- Recommendation Form -->
+        <!-- <form id="recommendation-form" class="mb-4">
+            <div class="input-group">
+                <input type="text" id="recommendation-input" class="form-control" placeholder="Enter a movie title for recommendations" required>
+                <button type="submit" class="btn btn-success">Get Recommendations</button>
+            </div>
+        </form>
+
+        <!-- Results Container -->
+        <!-- <div id="results"></div>
+    </div>
+    <script src="././static/app.js"></script> 
+</body>
+</html>   --> -->
+
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Search Platform</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Movie Search Platform</h1>
+        
+        
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <form id="regular-search-form" class="form-inline justify-content-center">
+                    <div class="input-group mb-3">
+                        <input type="text" id="search-input" class="form-control" 
+                               placeholder="Search movies..." required>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+       
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h4>Genres</h4>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="genre" value="Action" id="genre-action">
+                    <label class="form-check-label" for="genre-action">Action</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="genre" value="Comedy" id="genre-comedy">
+                    <label class="form-check-label" for="genre-comedy">Comedy</label>
+                </div>
+              
+            </div>
+            
+            <div class="col-md-6">
+                <form id="advanced-search-form">
+                    <div class="mb-3">
+                        <label for="min-year">Year Range</label>
+                        <div class="input-group">
+                            <input type="number" id="min-year" class="form-control" placeholder="Min Year">
+                            <input type="number" id="max-year" class="form-control" placeholder="Max Year">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="min-rating">Minimum Rating</label>
+                        <input type="number" id="min-rating" class="form-control" 
+                               min="0" max="10" step="0.1" placeholder="Min Rating">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="sort-by">Sort By</label>
+                        <select id="sort-by" class="form-control">
+                            <option value="">Default</option>
+                            <option value="title_asc">Title (A-Z)</option>
+                            <option value="title_desc">Title (Z-A)</option>
+                            <option value="rating_desc">Highest Rated</option>
+                            <option value="rating_asc">Lowest Rated</option>
+                            <option value="year_desc">Newest First</option>
+                            <option value="year_asc">Oldest First</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="result-limit">Results Limit</label>
+                        <input type="number" id="result-limit" class="form-control" 
+                               min="1" max="50" value="10" placeholder="Results Limit">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Advanced Search</button>
+                </form>
+            </div>
+        </div>
+
+        
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <form id="recommendation-form" class="form-inline justify-content-center">
+                    <div class="input-group mb-3">
+                        <input type="text" id="recommendation-input" class="form-control" 
+                               placeholder="Get movie recommendations..." required>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-success">Get Recommendations</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        
+        <div id="results" class="mt-4"></div>
+    </div>
+
+    <script src="././static/app.js"></script>
+</body>
+</html> -->
+
+<!-- working html code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Search Platform</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Movie Search Platform</h1>
+
+        
+        <form id="regular-search-form" class="mb-4">
+            <div class="input-group">
+                <input type="text" id="search-input" class="form-control" placeholder="Search movies...">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </form>
+
+        
+        <form id="advanced-search-form" class="mb-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Genres</h4>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genre" id="genre-action" value="Action">
+                        <label class="form-check-label" for="genre-action">Action</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genre" id="genre-comedy" value="Comedy">
+                        <label class="form-check-label" for="genre-comedy">Comedy</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genre" id="genre-drama" value="Drama">
+                        <label class="form-check-label" for="genre-drama">Drama</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genre" id="genre-sci-fi" value="Science Fiction">
+                        <label class="form-check-label" for="genre-sci-fi">Sci-Fi</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genre" id="genre-thriller" value="Thriller">
+                        <label class="form-check-label" for="genre-thriller">Thriller</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genre" id="genre-adventure" value="Adventure">
+                        <label class="form-check-label" for="genre-adventure">Adventure</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genre" id="genre-family" value="Family">
+                        <label class="form-check-label" for="genre-family">Family</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genre" id="genre-romance" value="Romance">
+                        <label class="form-check-label" for="genre-romance">Romance</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genre" id="genre-animation" value="Animation">
+                        <label class="form-check-label" for="genre-animation">Animation</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genre" id="genre-fantasy" value="Fantasy">
+                        <label class="form-check-label" for="genre-fantasy">Fantasy</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="min-year">Year Range</label>
+                        <div class="input-group">
+                            <input type="number" id="min-year" class="form-control" placeholder="Min Year">
+                            <input type="number" id="max-year" class="form-control" placeholder="Max Year">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="min-rating">Minimum Rating</label>
+                        <input type="number" id="min-rating" class="form-control" min="0" max="10" step="0.1" placeholder="Minimum Rating">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sort-by">Sort By</label>
+                        <select id="sort-by" class="form-control">
+                            <option value="title_asc">Title (A-Z)</option>
+                            <option value="title_desc">Title (Z-A)</option>
+                            <option value="rating_desc">Highest Rated</option>
+                            <option value="rating_asc">Lowest Rated</option>
+                            <option value="year_desc">Newest First</option>
+                            <option value="year_asc">Oldest First</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="result-limit">Results Limit</label>
+                        <input type="number" id="result-limit" class="form-control" min="1" max="50" value="10">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Advanced Search</button>
+                </div>
+            </div>
+        </form>
+
+        
+        <form id="recommendation-form" class="mb-4">
+            <div class="input-group">
+                <input type="text" id="recommendation-input" class="form-control" placeholder="Enter a movie title for recommendations">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Get Recommendations</button>
+                </div>
+            </div>
+        </form>
+
+        
+        <div id="results" class="mt-4"></div>
+    </div>
+
+    <script src="././static/app.js"></script>
+</body>
+</html> -->
+
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Movie Search Platform</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+  <div class="container mx-auto mt-10">
+    <h1 class="text-3xl font-bold text-center mb-6">Movie Search Platform</h1>
+
+    <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+      <div class="flex items-center">
+        <input type="text" class="flex-1 px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search movies...">
+        <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-r-lg">Search</button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <h2 class="text-xl font-bold mb-4">Genres</h2>
+        <div class="space-y-2">
+          <div class="flex items-center">
+            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-500">
+            <label class="ml-2">Action</label>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-500">
+            <label class="ml-2">Comedy</label>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-500">
+            <label class="ml-2">Drama</label>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-500">
+            <label class="ml-2">Sci-Fi</label>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-500">
+            <label class="ml-2">Thriller</label>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-500">
+            <label class="ml-2">Adventure</label>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-500">
+            <label class="ml-2">Family</label>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-500">
+            <label class="ml-2">Romance</label>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-500">
+            <label class="ml-2">Animation</label>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-500">
+            <label class="ml-2">Fantasy</label>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <div class="space-y-4">
+          <div>
+            <label class="block font-bold mb-2">Year Range</label>
+            <div class="flex space-x-2">
+              <input type="number" class="flex-1 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Min Year">
+              <input type="number" class="flex-1 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Max Year">
+            </div>
+          </div>
+          <div>
+            <label class="block font-bold mb-2">Minimum Rating</label>
+            <input type="number" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+          </div>
+          <div>
+            <label class="block font-bold mb-2">Sort By</label>
+            <select class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <option>Title (A-Z)</option>
+              <option>Title (Z-A)</option>
+              <option>Highest Rated</option>
+              <option>Lowest Rated</option>
+              <option>Newest First</option>
+              <option>Oldest First</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold mb-2">Results Limit</label>
+            <input type="number" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" value="10">
+          </div>
+          <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Advanced Search</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white shadow-md rounded-lg p-6 mt-6">
+      <div class="flex items-center">
+        <input type="text" class="flex-1 px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Get Recommendations">
+        <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-r-lg">Get Recommendations</button>
+      </div>
+    </div>
+
+    <div id="results" class="mt-6"></div>
+  </div>
+  <script src="././static/app.js"></script>
+</body>
+</html> -->
+
+
